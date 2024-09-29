@@ -1,8 +1,7 @@
 (function(){"use strict";try{if(typeof document<"u"){var e=document.createElement("style");e.appendChild(document.createTextNode(".ce-paragraph{line-height:1.6em;outline:none}.ce-block:only-of-type .ce-paragraph[data-placeholder-active]:empty:before,.ce-block:only-of-type .ce-paragraph[data-placeholder-active][data-empty=true]:before{content:attr(data-placeholder-active)}.ce-paragraph p:first-of-type{margin-top:0}.ce-paragraph p:last-of-type{margin-bottom:0}")),document.head.appendChild(e)}}catch(a){console.error("vite-plugin-css-injected-by-js",a)}})();
-const a = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M8 9V7.2C8 7.08954 8.08954 7 8.2 7L12 7M16 9V7.2C16 7.08954 15.9105 7 15.8 7L12 7M12 7L12 17M12 17H10M12 17H14"/></svg>';
-function l(r) {
+function s(i) {
   const t = document.createElement("div");
-  t.innerHTML = r.trim();
+  t.innerHTML = i.trim();
   const e = document.createDocumentFragment();
   return e.append(...Array.from(t.childNodes)), e;
 }
@@ -33,11 +32,11 @@ class n {
    * @param {object} params.api - editor.js api
    * @param {boolean} readOnly - read only mode flag
    */
-  constructor({ data: t, config: e, api: i, readOnly: s }) {
-    this.api = i, this.readOnly = s, this._CSS = {
+  constructor({ data: t, config: e, api: r, readOnly: a }) {
+    this.api = r, this.readOnly = a, this._CSS = {
       block: this.api.styles.block,
       wrapper: "ce-paragraph"
-    }, this.readOnly || (this.onKeyUp = this.onKeyUp.bind(this)), this._placeholder = e.placeholder ? e.placeholder : n.DEFAULT_PLACEHOLDER, this._data = t ?? {}, this._element = null, this._preserveBlank = e.preserveBlank ?? !1;
+    }, this.readOnly || (this.onKeyUp = this.onKeyUp.bind(this)), this._placeholder = e.placeholder ? e.placeholder : n.DEFAULT_PLACEHOLDER, this._data = t ?? {}, this._initData = t ?? {}, this._element = null, this._preserveBlank = e.preserveBlank ?? !1;
   }
   /**
    * Check if text content is empty and set empty string to inner html.
@@ -80,7 +79,7 @@ class n {
     if (!this._element)
       return;
     this._data.text += t.text;
-    const e = l(t.text);
+    const e = s(t.text);
     this._element.appendChild(e), this._element.normalize();
   }
   /**
@@ -103,6 +102,7 @@ class n {
    */
   save(t) {
     return {
+      ...this._initData,
       text: t.innerHTML
     };
   }
@@ -159,17 +159,6 @@ class n {
   static get pasteConfig() {
     return {
       tags: ["P"]
-    };
-  }
-  /**
-   * Icon and title for displaying at the Toolbox
-   *
-   * @returns {ToolboxConfig} - Paragraph Toolbox Setting
-   */
-  static get toolbox() {
-    return {
-      icon: a,
-      title: "Text"
     };
   }
 }

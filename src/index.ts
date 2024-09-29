@@ -2,8 +2,6 @@
  * Build styles
  */
 import './index.css';
-
-import { IconText } from '@codexteam/icons';
 import makeFragment from './utils/makeFragment';
 
 import type {
@@ -133,6 +131,7 @@ export default class Paragraph {
    * Paragraph's data
    */
   private _data: ParagraphData;
+  private _initData: any;
 
   /**
    * Paragraph's main Element
@@ -175,6 +174,7 @@ export default class Paragraph {
       ? config.placeholder
       : Paragraph.DEFAULT_PLACEHOLDER;
     this._data = data ?? {};
+    this._initData = data ?? {};
     this._element = null;
     this._preserveBlank = config.preserveBlank ?? false;
   }
@@ -288,8 +288,9 @@ export default class Paragraph {
    * @returns {ParagraphData} - saved data
    * @public
    */
-  save(toolsContent: HTMLDivElement): ParagraphData {
+  save(toolsContent: HTMLDivElement): any {
     return {
+      ...this._initData,
       text: toolsContent.innerHTML,
     };
   }
@@ -358,18 +359,6 @@ export default class Paragraph {
   static get pasteConfig(): PasteConfig {
     return {
       tags: ['P'],
-    };
-  }
-
-  /**
-   * Icon and title for displaying at the Toolbox
-   *
-   * @returns {ToolboxConfig} - Paragraph Toolbox Setting
-   */
-  static get toolbox(): ToolboxConfig {
-    return {
-      icon: IconText,
-      title: 'Text',
     };
   }
 }

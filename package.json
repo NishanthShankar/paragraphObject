@@ -1,6 +1,6 @@
 {
-  "name": "@editorjs/paragraph",
-  "version": "2.11.6",
+  "name": "editorjs-paragraph-as-object",
+  "version": "2.12.1",
   "keywords": [
     "codex editor",
     "paragraph",
@@ -9,7 +9,7 @@
   ],
   "description": "Paragraph Tool for Editor.js",
   "license": "MIT",
-  "repository": "https://github.com/editor-js/paragraph",
+  "repository": "https://github.com/NishanthShankar/paragraphObject.git",
   "files": [
     "dist"
   ],

@@ -1,4 +1,4 @@
-import { API, ConversionConfig, HTMLPasteEvent, PasteConfig, SanitizerConfig, ToolConfig, ToolboxConfig } from '@editorjs/editorjs';
+import { API, ConversionConfig, HTMLPasteEvent, PasteConfig, SanitizerConfig, ToolConfig } from '@editorjs/editorjs';
 
 /**
  * Base Paragraph Block for the Editor.js.
@@ -88,6 +88,7 @@ export default class Paragraph {
      * Paragraph's data
      */
     private _data;
+    private _initData;
     /**
      * Paragraph's main Element
      */
@@ -150,7 +151,7 @@ export default class Paragraph {
      * @returns {ParagraphData} - saved data
      * @public
      */
-    save(toolsContent: HTMLDivElement): ParagraphData;
+    save(toolsContent: HTMLDivElement): any;
     /**
      * On paste callback fired from Editor.
      *
@@ -180,11 +181,5 @@ export default class Paragraph {
      * @returns {PasteConfig} - Paragraph Paste Setting
      */
     static get pasteConfig(): PasteConfig;
-    /**
-     * Icon and title for displaying at the Toolbox
-     *
-     * @returns {ToolboxConfig} - Paragraph Toolbox Setting
-     */
-    static get toolbox(): ToolboxConfig;
 }
 export {};
