@@ -1,9 +1,9 @@
 (function(){"use strict";try{if(typeof document<"u"){var e=document.createElement("style");e.appendChild(document.createTextNode(".ce-paragraph{line-height:1.6em;outline:none}.ce-block:only-of-type .ce-paragraph[data-placeholder-active]:empty:before,.ce-block:only-of-type .ce-paragraph[data-placeholder-active][data-empty=true]:before{content:attr(data-placeholder-active)}.ce-paragraph p:first-of-type{margin-top:0}.ce-paragraph p:last-of-type{margin-bottom:0}")),document.head.appendChild(e)}}catch(a){console.error("vite-plugin-css-injected-by-js",a)}})();
-function a(i) {
-  const e = document.createElement("div");
-  e.innerHTML = i.trim();
-  const t = document.createDocumentFragment();
-  return t.append(...Array.from(e.childNodes)), t;
+function s(i) {
+  const t = document.createElement("div");
+  t.innerHTML = i.trim();
+  const e = document.createDocumentFragment();
+  return e.append(...Array.from(t.childNodes)), e;
 }
 /**
  * Base Paragraph Block for the Editor.js.
@@ -13,7 +13,7 @@ function a(i) {
  * @copyright CodeX 2018
  * @license The MIT License (MIT)
  */
-class r {
+class n {
   /**
    * Default placeholder for Paragraph Tool
    *
@@ -32,11 +32,11 @@ class r {
    * @param {object} params.api - editor.js api
    * @param {boolean} readOnly - read only mode flag
    */
-  constructor({ data: e, config: t, api: n, readOnly: s }) {
-    this.api = n, this.readOnly = s, this._CSS = {
+  constructor({ data: t, config: e, api: r, readOnly: a }) {
+    this.api = r, this.readOnly = a, this._CSS = {
       block: this.api.styles.block,
       wrapper: "ce-paragraph"
-    }, this.readOnly || (this.onKeyUp = this.onKeyUp.bind(this)), this._placeholder = t.placeholder ? t.placeholder : r.DEFAULT_PLACEHOLDER, this._data = e ?? {}, this._initData = e ?? {}, this._element = null, this._preserveBlank = t.preserveBlank ?? !1;
+    }, this.readOnly || (this.onKeyUp = this.onKeyUp.bind(this)), this._placeholder = e.placeholder ? e.placeholder : n.DEFAULT_PLACEHOLDER, this._data = t ?? {}, this._initData = t ?? {}, this._element = null, this._preserveBlank = e.preserveBlank ?? !1;
   }
   /**
    * Check if text content is empty and set empty string to inner html.
@@ -44,11 +44,11 @@ class r {
    *
    * @param {KeyboardEvent} e - key up event
    */
-  onKeyUp(e) {
-    if (e.code !== "Backspace" && e.code !== "Delete" || !this._element)
+  onKeyUp(t) {
+    if (t.code !== "Backspace" && t.code !== "Delete" || !this._element)
       return;
-    const { textContent: t } = this._element;
-    t === "" && (this._element.innerHTML = "");
+    const { textContent: e } = this._element;
+    e === "" && (this._element.innerHTML = "");
   }
   /**
    * Create Tool's view
@@ -57,8 +57,8 @@ class r {
    * @private
    */
   drawView() {
-    const e = document.createElement("DIV");
-    return e.classList.add(this._CSS.wrapper, this._CSS.block), e.contentEditable = "false", e.dataset.placeholderActive = this.api.i18n.t(this._placeholder), this._data.text && (e.innerHTML = this._data.text), this.readOnly || (e.contentEditable = "true", e.addEventListener("keyup", this.onKeyUp)), e;
+    const t = document.createElement("DIV");
+    return t.classList.add(this._CSS.wrapper, this._CSS.block), t.contentEditable = "false", t.dataset.placeholderActive = this.api.i18n.t(this._placeholder), this._data.text && (t.innerHTML = this._data.text), this.readOnly || (t.contentEditable = "true", t.addEventListener("keyup", this.onKeyUp)), t;
   }
   /**
    * Return Tool's view
@@ -75,12 +75,12 @@ class r {
    * @param {ParagraphData} data
    * @public
    */
-  merge(e) {
+  merge(t) {
     if (!this._element)
       return;
-    this._data.text += e.text;
-    const t = a(e.text);
-    this._element.appendChild(t), this._element.normalize();
+    this._data.text += t.text;
+    const e = s(t.text);
+    this._element.appendChild(e), this._element.normalize();
   }
   /**
    * Validate Paragraph block data:
@@ -90,8 +90,8 @@ class r {
    * @returns {boolean} false if saved data is not correct, otherwise true
    * @public
    */
-  validate(e) {
-    return !(e.text.trim() === "" && !this._preserveBlank);
+  validate(t) {
+    return !(t.text.trim() === "" && !this._preserveBlank);
   }
   /**
    * Extract Tool's data from the view
@@ -100,10 +100,10 @@ class r {
    * @returns {ParagraphData} - saved data
    * @public
    */
-  save(e) {
+  save(t) {
     return {
       ...this._initData,
-      text: e.innerHTML
+      text: t.innerHTML
     };
   }
   /**
@@ -111,21 +111,14 @@ class r {
    *
    * @param {HTMLPasteEvent} event - event with pasted data
    */
-  // onPaste(event: HTMLPasteEvent): void {
-  //   const data = {
-  //     text: event.detail.data.innerHTML,
-  //   };
-  //   this._data = data;
-  //   /**
-  //    * We use requestAnimationFrame for performance purposes
-  //    */
-  //   window.requestAnimationFrame(() => {
-  //     if (!this._element) {
-  //       return;
-  //     }
-  //     this._element.innerHTML = this._data.text || '';
-  //   });
-  // }
+  onPaste(t) {
+    const e = {
+      text: t.detail.data.innerHTML
+    };
+    this._data = e, window.requestAnimationFrame(() => {
+      this._element && (this._element.innerHTML = this._data.text || "");
+    });
+  }
   /**
    * Enable Conversion Toolbar. Paragraph can be converted to/from other tools
    * @returns {ConversionConfig}
@@ -170,5 +163,5 @@ class r {
   }
 }
 export {
-  r as default
+  n as default
 };

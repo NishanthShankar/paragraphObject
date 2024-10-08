@@ -1,4 +1,4 @@
-import { API, ConversionConfig, PasteConfig, SanitizerConfig, ToolConfig } from '@editorjs/editorjs';
+import { API, ConversionConfig, HTMLPasteEvent, PasteConfig, SanitizerConfig, ToolConfig } from '@editorjs/editorjs';
 
 /**
  * Base Paragraph Block for the Editor.js.
@@ -157,6 +157,7 @@ export default class Paragraph {
      *
      * @param {HTMLPasteEvent} event - event with pasted data
      */
+    onPaste(event: HTMLPasteEvent): void;
     /**
      * Enable Conversion Toolbar. Paragraph can be converted to/from other tools
      * @returns {ConversionConfig}

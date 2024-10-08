@@ -300,23 +300,23 @@ export default class Paragraph {
    *
    * @param {HTMLPasteEvent} event - event with pasted data
    */
-  // onPaste(event: HTMLPasteEvent): void {
-  //   const data = {
-  //     text: event.detail.data.innerHTML,
-  //   };
+  onPaste(event: HTMLPasteEvent): void {
+    const data = {
+      text: event.detail.data.innerHTML,
+    };
 
-  //   this._data = data;
+    this._data = data;
 
-  //   /**
-  //    * We use requestAnimationFrame for performance purposes
-  //    */
-  //   window.requestAnimationFrame(() => {
-  //     if (!this._element) {
-  //       return;
-  //     }
-  //     this._element.innerHTML = this._data.text || '';
-  //   });
-  // }
+    /**
+     * We use requestAnimationFrame for performance purposes
+     */
+    window.requestAnimationFrame(() => {
+      if (!this._element) {
+        return;
+      }
+      this._element.innerHTML = this._data.text || '';
+    });
+  }
 
   /**
    * Enable Conversion Toolbar. Paragraph can be converted to/from other tools
